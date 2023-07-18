@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}杂项}{3}{}%
+\contentsline {subsection}{\numberline {1.1}快速读入和快速输出}{3}{}%
+\contentsline {subsection}{\numberline {1.2}}{3}{}%
+\contentsline {section}{\numberline {2}图论}{4}{}%
+\contentsline {subsection}{\numberline {2.1}最短路}{4}{}%
+\contentsline {subsection}{\numberline {2.2}DAG最长路}{4}{}%
+\contentsline {subsection}{\numberline {2.3}网络流相关}{6}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}最小费用最大流}{6}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}带权二分图最大匹配KM}{7}{}%
+\contentsline {section}{\numberline {3}数学}{10}{}%
+\contentsline {subsection}{\numberline {3.1}数论}{10}{}%
+\contentsline {subsection}{\numberline {3.2}组合数学}{10}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}球盒问题模型}{10}{}%
+\contentsline {section}{\numberline {4}数据结构}{11}{}%
+\contentsline {subsection}{\numberline {4.1}ST表解决静态 RMQ 问题}{11}{}%
