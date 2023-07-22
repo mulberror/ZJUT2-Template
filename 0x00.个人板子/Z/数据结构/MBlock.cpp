@@ -6,8 +6,7 @@ typedef long long i64;
 
 const int N = 2e5 + 5;
 
-template <typename T>
-void read(T& x) {
+template <typename T> void read(T& x) {
     x = 0;
     char ch = 0;
     int f = 1;

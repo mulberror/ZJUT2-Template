@@ -4,8 +4,7 @@ using namespace std;
 
 using i64 = long long;
 
-template <typename T>
-T power(T x, i64 y) {
+template <typename T> T power(T x, i64 y) {
     T res = 1;
     for (; y; y >>= 1, x *= x) {
         if (y & 1) {
@@ -15,8 +14,7 @@ T power(T x, i64 y) {
     return res;
 }
 
-template <int MOD = 998244353>
-struct ModularInt {
+template <int MOD = 998244353> struct ModularInt {
     static constexpr int P = MOD;
 
     static int norm(int x) {
