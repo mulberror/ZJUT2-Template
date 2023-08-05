@@ -70,3 +70,55 @@ int main() {
         modify(root[i], root[i - 1], 0, m - 1, w[i], 1);
     }
 }
+
+///================================================
+
+struct ZXtree {
+    #define ls(p) (tr[(p)].ch[0])
+    #define rs(p) (tr[(p)].ch[1])
+    struct Node {
+        int sum, cnt;
+        int ch[2];
+    } tr[N * 32 * 32];
+    int cnt;
+    ZXtree() : cnt(0) {}
+ 
+    void pushup(int p) {
+        tr[p].sum = tr[p].cnt = 0;
+        if (ls(p)) tr[p].sum += tr[ls(p)].sum, tr[p].cnt += tr[ls(p)].cnt;
+        if (rs(p)) tr[p].sum += tr[rs(p)].sum, tr[p].cnt += tr[rs(p)].cnt;
+    }
+ 
+    void modify(int& p, int fr, int l, int r, int pos, int v) {
+        p = ++cnt, tr[p] = tr[fr];
+        if (l == r) {
+            tr[p].sum += v;
+            tr[p].cnt++;
+            return;
+        }
+        int mid = (l + r) >> 1;
+        if (pos <= mid) modify(ls(p), ls(fr), l, mid, pos, v);
+        else modify(rs(p), rs(fr), mid + 1, r, pos, v);
+        pushup(p);
+    }
+ 
+    int find(int p1, int p2, int l, int r, int k) { // sum<=k的和
+        if (l == r) {
+            if (tr[p2].sum - tr[p1].sum <= k) return tr[p2].sum - tr[p1].sum;
+            return 0;
+        }
+        int mid = (l + r) >> 1, sum = tr[rs(p2)].sum - tr[rs(p1)].sum;
+        if (sum <= k) {
+            return find(ls(p1), ls(p2), l, mid, k - sum) + tr[rs(p2)].sum - tr[rs(p1)].sum;
+        }
+        return find(rs(p1), rs(p2), mid + 1, r, k);
+    }
+ 
+    int kth(int p1, int p2, int l, int r, int k) { // 第k大的数
+        if (tr[p2].sum - tr[p1].sum < k) return 0;
+        if (l == r) return l;
+        int mid = (l + r) >> 1, sum = tr[rs(p2)].sum - tr[rs(p1)].sum;
+        if (sum >= k) return kth(rs(p1), rs(p2), mid + 1, r, k);
+        return kth(ls(p1), ls(p2), l, mid, k - sum);
+    }
+} tr[2];
