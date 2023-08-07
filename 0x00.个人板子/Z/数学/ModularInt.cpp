@@ -37,8 +37,8 @@ struct ModularInt {
 
     ModularInt &operator=(const int &rhs) { return v = norm(rhs), *this; }
 
-    ModularInt &operator+=(const ModularInt &rhs) { return v = fix(v + rhs.v), *this; }
-    ModularInt &operator-=(const ModularInt &rhs) { return v = fix(v - rhs.v), *this; }
+    ModularInt &operator+=(const ModularInt &rhs) { return v = norm(v + rhs.v), *this; }
+    ModularInt &operator-=(const ModularInt &rhs) { return v = norm(v - rhs.v), *this; }
     ModularInt &operator*=(const ModularInt &rhs) { return v = i64(v) * rhs.v % P, *this; }
     ModularInt &operator/=(const ModularInt &rhs) { return *this *= rhs.inv(), *this; }
 
