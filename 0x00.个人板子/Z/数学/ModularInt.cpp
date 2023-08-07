@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-
 using i64 = long long;
 
 template <typename T> T power(T x, i64 y) {
@@ -14,24 +12,23 @@ template <typename T> T power(T x, i64 y) {
     return res;
 }
 
-template <int MOD = 998244353> struct ModularInt {
+template <int MOD = 998244353> 
+struct ModularInt {
     static constexpr int P = MOD;
 
     static int norm(int x) {
         x %= P;
-        if (x < 0) {
-            x += P;
-        }
+        if (x < 0) { x += P; }
         return x;
     }
 
-    int x;
+    int v;
 
-    ModularInt() : x(0) {}
-    ModularInt(int x) : x(norm(x)) {}
+    ModularInt() : v(0) {}
+    ModularInt(int v) : v(norm(v)) {}
 
     int val() const { return v; }
-    ModularInt operator-() const { return ModularInt(P - x); }
+    ModularInt operator-() const { return ModularInt(P - v); }
 
     ModularInt inv() const {
         assert(v != 0);
@@ -61,5 +58,3 @@ template <int MOD = 998244353> struct ModularInt {
         return is;
     }
 };
-
-using mint = ModularInt<998244353>;
