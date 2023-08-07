@@ -2,7 +2,8 @@
 using namespace std;
 using i64 = long long;
 
-template <typename T> T power(T x, i64 y) {
+template <typename T> 
+T power(T x, i64 y) {
     T res = 1;
     for (; y; y >>= 1, x *= x) {
         if (y & 1) {
@@ -58,3 +59,5 @@ struct ModularInt {
         return is;
     }
 };
+
+using mint = ModularInt<998244353>;
