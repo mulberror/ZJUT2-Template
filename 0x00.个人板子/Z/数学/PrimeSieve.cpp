@@ -1,38 +1,46 @@
-#include <bits/stdc++.h>
+vector<int> prime;
+vector<bool> nprime;
+vector<int> minp, maxp, phi, mu;
 
-using namespace std;
-
-constexpr int MAXN = 1e7, MAXM = 7e5;
-
-int primeCnt;
-bool notPrime[MAXN + 1];
-int prime[MAXM + 1];
-int minp[MAXN + 1];
-
-void Sieve() {
-    for (int i = 2; i <= MAXN; i++) {
-        if (!notPrime[i]) prime[++primeCnt] = i, minp[i] = i;
-
-        for (int j = 1; j <= primeCnt && prime[j] * i <= MAXN; j++) {
-            minp[prime[j] * i] = prime[j];
-            notPrime[prime[j] * i] = 1;
-            if (i % prime[j] == 0) break;
+void sieve(int N) {
+    nprime.assign(N + 1, false);
+    minp.assign(N + 1, 0), maxp.assign(N + 1, 0), phi.assign(N + 1, 0), mu.assign(N + 1, 0);
+    prime.clear();
+    maxp[1] = minp[1] = phi[1] = mu[1] = 1;
+    for (int i = 2; i <= N; i++) {
+        if (!nprime[i]) {
+            prime.push_back(i);
+            minp[i] = maxp[i] = i;
+            phi[i] = i - 1, mu[i] = -1;
+        }
+        for (auto x : prime) {
+            if (i * x > N) {
+                break;
+            }
+            minp[i * x] = minp[x];
+            maxp[i * x] = max(x, maxp[i]);
+            nprime[i * x] = true;
+            if (i % x == 0) {
+                phi[i * x] = phi[i] * x;
+                mu[i * x] = 0;
+                break;
+            } else {
+                mu[i * x] = -mu[i];
+                phi[i * x] = phi[i] * (x - 1);
+            }
         }
     }
 }
 
-vector<pair<int, int>> Divide(int x) {
-    vector<pair<int, int>> ret;
-
-    while (x > 1) {
-        int t = minp[x], cnt = 0;
-        for (; t == minp[x]; x /= minp[x]) cnt++;
-        ret.push_back({t, cnt});
+vector<pair<int, int>> div(int n) {
+    vector<pair<int, int>> res;
+    while (n > 1) {
+        int t = minp[n], cnt = 0;
+        while (n % t == 0) {
+            cnt++;
+            n /= t;
+        }
+        res.push_back({t, cnt});
     }
-    return ret;
-}
-
-int main() {
-    Sieve();
-    return 0;
+    return res;
 }
