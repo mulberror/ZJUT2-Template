@@ -50,9 +50,8 @@ void modify(int l, int r, int v) {
 
 void assign(int l, int r, int v) {
     auto ir = split(r + 1), il = split(l); 
-    for (auto i = il; i != ir; i++) {
-        i->v = v;
-    }
+    s.erase(il, ir);
+    s.insert(Node(l, r, v));
 }
 
 i64 kth(int l, int r, int k) {
